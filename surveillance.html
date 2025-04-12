@@ -1,0 +1,148 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stray Surveillance</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000;
+      color: #f0f0f0;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.85);
+      min-height: 100vh;
+      padding: 40px;
+    }
+    h2 {
+      text-align: center;
+      color: #00bcd4;
+      margin-bottom: 30px;
+    }
+    .dog-data {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background-color: #1c1c1c;
+      border-left: 8px solid #00bcd4;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 255, 255, 0.1);
+    }
+    .card h3 {
+      margin-top: 0;
+      color: #4dd0e1;
+    }
+    .card p {
+      margin: 6px 0;
+    }
+    #chartContainer {
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+<div class="overlay">
+  <h2>Stray Dog Surveillance Report - BBMP 2024</h2>
+  <div class="dog-data">
+    <div class="card">
+      <h3>Bengaluru East</h3>
+      <p><strong>Total Dogs:</strong> 37,685</p>
+      <p><strong>Male:</strong> 21,584</p>
+      <p><strong>Female:</strong> 1,128</p>
+      <p><strong>Aggressive Rate:</strong> 56%</p>
+      <p><strong>Chances of Attacking:</strong> 40%</p>
+    </div>
+    <div class="card">
+      <h3>Bengaluru West</h3>
+      <p><strong>Total Dogs:</strong> 22,025</p>
+      <p><strong>Male:</strong> 13,870</p>
+      <p><strong>Female:</strong> 6,261</p>
+      <p><strong>Aggressive Rate:</strong> 40%</p>
+      <p><strong>Chances of Attacking:</strong> 20%</p>
+    </div>
+    <div class="card">
+      <h3>Bengaluru South</h3>
+      <p><strong>Total Dogs:</strong> 23,241</p>
+      <p><strong>Male:</strong> 13,116</p>
+      <p><strong>Female:</strong> 7,066</p>
+      <p><strong>Aggressive Rate:</strong> 66%</p>
+      <p><strong>Chances of Attacking:</strong> 52%</p>
+    </div>
+    <div class="card">
+      <h3>Yelahanka</h3>
+      <p><strong>Total Dogs:</strong> 36,343</p>
+      <p><strong>Male:</strong> 21,165</p>
+      <p><strong>Female:</strong> 13,282</p>
+      <p><strong>Aggressive Rate:</strong> 30%</p>
+      <p><strong>Chances of Attacking:</strong> 20%</p>
+    </div>
+    <div class="card">
+      <h3>Bommanahalli</h3>
+      <p><strong>Total Dogs:</strong> 39,183</p>
+      <p><strong>Male:</strong> 23,860</p>
+      <p><strong>Female:</strong> 9,299</p>
+      <p><strong>Aggressive Rate:</strong> 70%</p>
+      <p><strong>Chances of Attacking:</strong> 55%</p>
+    </div>
+  </div>
+
+  <div id="chartContainer">
+    <canvas id="rateChart" width="600" height="300"></canvas>
+  </div>
+</div>
+
+<script>
+  const labels = ['East', 'West', 'South', 'Yelahanka', 'Bommanahalli'];
+  const aggression = [56, 40, 66, 30, 70];
+  const attack = [40, 20, 52, 20, 55];
+
+  const ctx = document.getElementById('rateChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Aggressive Rate (%)',
+          data: aggression,
+          backgroundColor: 'rgba(255, 99, 132, 0.7)'
+        },
+        {
+          label: 'Chances of Attacking (%)',
+          data: attack,
+          backgroundColor: 'rgba(54, 162, 235, 0.7)'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100
+        },
+        x: {
+          ticks: {
+            color: '#f0f0f0'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: '#f0f0f0'
+          }
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
